@@ -1,17 +1,10 @@
-const dfs = (
-  graph: Array<Array<number>>, 
-  v: number, 
-  visited: Array<number>
-) => {
-  visited[v] = 1;
-  process.stdout.write(`${v} `);
-  
-  graph[v].filter((i: number) => {
-    if (!visited[i]) dfs(graph, i, visited);
-  });
-};
+const visited: Array<number> = Array.from(
+  { 
+    length: 9 
+  }, 
+  () => 0
+);
 
-const visited: Array<number> = Array.from({ length: 9 }, () => 0);
 const graph: Array<Array<number>> = [
   [],
   [2, 3, 8],
@@ -23,5 +16,18 @@ const graph: Array<Array<number>> = [
   [2, 6, 8],
   [1, 7]
 ];
+
+const dfs = (
+  graph: Array<Array<number>>, 
+  v: number, 
+  visited: Array<number>
+) => {
+  visited[v] = 1;
+  process.stdout.write(`${v} `);
+  
+  graph[v].filter((el: number) => {
+    if (!visited[el]) dfs(graph, el, visited);
+  });
+};
 
 dfs(graph, 1, visited);
